@@ -1,6 +1,8 @@
+[![CircleCI](https://circleci.com/gh/fterrier/gender-decoder.svg?style=svg)](https://circleci.com/gh/fterrier/gender-decoder)
+
 # gender-decoder
 
-Gender Decoder is a simple  tool that checks the text of job ads to see if it includes any subtly gender-coded language. 
+Gender Decoder is a simple  tool that checks the text of job ads to see if it includes any subtly gender-coded language.
 
 By 'subtly gender-coded language' I mean language that reflects stereotypes about men and women, like women being more nurturing and men more aggressive. A 2011 research paper showed that subtly masculine-coded language in ads can put women off applying for jobs.
 
