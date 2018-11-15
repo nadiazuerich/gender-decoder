@@ -89,7 +89,7 @@ class TestCase(unittest.TestCase):
         j1 = JobAd(u"leader leader leader, ambition, ambition, competition")
         masc_words, fem_words = j1.list_words()
         self.assertEqual(masc_words,
-                         ['leader (3 times)', 'ambition (2 times)', 
+                         ['leader (3 times)', 'ambition (2 times)',
                           'competition'])
 
     def test_assess_coding_neutral_and_empty(self):
@@ -152,23 +152,23 @@ class TestCase(unittest.TestCase):
         self.assertEqual(j1.feminine_word_count, 2)
         self.assertEqual(j1.feminine_coded_words,"sharing,empathy")
 
-    def test_increment_or_create(self):
-        ad = JobAd(u"sharing leader sharing")
-        sharing_counter = CodedWordCounter.query.filter_by(
-            ad_hash=ad.hash).filter_by(word='sharing').all()
-        self.assertEqual(len(sharing_counter), 1)
-        self.assertEqual(sharing_counter[0].count, 2)
-
-        leader_counter = CodedWordCounter.query.filter_by(
-            ad_hash=ad.hash).filter_by(word='leader').all()
-        self.assertEqual(len(leader_counter), 1)
-        self.assertEqual(leader_counter[0].count, 1)
-
-        CodedWordCounter.increment_or_create(ad, "leader", "masculine")
-        leader_counter = CodedWordCounter.query.filter_by(
-            ad_hash=ad.hash).filter_by(word='leader').all()
-        self.assertEqual(len(leader_counter), 1)
-        self.assertEqual(leader_counter[0].count, 2)
+    # def test_increment_or_create(self):
+    #     ad = JobAd(u"sharing leader sharing")
+    #     sharing_counter = CodedWordCounter.query.filter_by(
+    #         ad_hash=ad.hash).filter_by(word='sharing').all()
+    #     self.assertEqual(len(sharing_counter), 1)
+    #     self.assertEqual(sharing_counter[0].count, 2)
+    #
+    #     leader_counter = CodedWordCounter.query.filter_by(
+    #         ad_hash=ad.hash).filter_by(word='leader').all()
+    #     self.assertEqual(len(leader_counter), 1)
+    #     self.assertEqual(leader_counter[0].count, 1)
+    #
+    #     CodedWordCounter.increment_or_create(ad, "leader", "masculine")
+    #     leader_counter = CodedWordCounter.query.filter_by(
+    #         ad_hash=ad.hash).filter_by(word='leader').all()
+    #     self.assertEqual(len(leader_counter), 1)
+    #     self.assertEqual(leader_counter[0].count, 2)
 
     def test_process_ad(self):
         ad = JobAd(u"Sharing: ambition\tkindness&empathy(never more than frou)"
