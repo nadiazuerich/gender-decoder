@@ -2,3 +2,4 @@
 venv
 instance
 .DS_Store
+**/*.db
