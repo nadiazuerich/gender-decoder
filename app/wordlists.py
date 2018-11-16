@@ -51,7 +51,12 @@ feminine_coded_words = [
     "inclusive",
     "yield",
     "share",
-    "sharin"
+    "sharin",
+    # german starts here
+    "verständnisvoll",
+    "freundlich",
+    "unterstützend",
+    "gemeinsam"
 ]
 
 masculine_coded_words = [
@@ -106,7 +111,15 @@ masculine_coded_words = [
     "selfsufficien",
     "stubborn",
     "superior",
-    "unreasonab"
+    "unreasonab",
+    # german starts here
+    "durchsetzungsfähig",
+    "analytisch",
+    "selbstbewusst",
+    "aktiv",
+    "unabhängig",
+    "zielstrebig",
+    "durchsetzungsstark"
 ]
 
 hyphenated_coded_words = [
