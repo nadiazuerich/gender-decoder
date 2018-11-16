@@ -6,7 +6,7 @@ import unittest
 
 from config import basedir
 from app import app, db
-from app.models import JobAd, CodedWordCounter, de_hyphen_non_coded_words
+from app.models import JobAd, CodedWordCounter, de_hyphen_non_coded_words, clean_up_text
 
 
 class TestCase(unittest.TestCase):
@@ -194,6 +194,11 @@ class TestCase(unittest.TestCase):
 
     def test_de_hyphen_non_coded_words(self):
         self.assertEqual(['competition', 'decisiveness'], de_hyphen_non_coded_words('competition-decisiveness'))
+
+    def test_clean_up_text(self):
+        self.assertEqual('blabla-blabla', clean_up_text('blabla—blabla'))
+        self.assertEqual('blabla-blabla', clean_up_text('blabla–blabla'))
+        self.assertEqual('unabhängig', clean_up_text('unabhängig'))
 
 if __name__ == '__main__':
     unittest.main()
