@@ -6,8 +6,7 @@ import unittest
 
 from config import basedir
 from app import app, db
-from app.models import JobAd, CodedWordCounter
-
+from app.models import JobAd, CodedWordCounter, de_hyphen_non_coded_words
 
 
 class TestCase(unittest.TestCase):
@@ -68,7 +67,7 @@ class TestCase(unittest.TestCase):
             ['lead', 'developer', 'v', 'good'])
 
     def test_extract_coded_words(self):
-        j1 = JobAd(u"Ambition:competition–decisiveness, empathy&kindness")
+        j1 = JobAd(u"Ambition:competition-decisiveness, empathy&kindness")
         self.assertEqual(j1.masculine_coded_words,
             "ambition,competition,decisiveness")
         self.assertEqual(j1.masculine_word_count, 3)
@@ -102,20 +101,20 @@ class TestCase(unittest.TestCase):
         self.assertEqual(j2.coding, "neutral")
 
     def test_assess_coding_masculine(self):
-        j1 = JobAd(u"Ambition:competition–decisiveness, empathy&kindness")
+        j1 = JobAd(u"Ambition:competition-decisiveness, empathy&kindness")
         self.assertEqual(j1.masculine_word_count, 3)
         self.assertEqual(j1.feminine_word_count, 2)
         self.assertEqual(j1.coding, "masculine-coded")
-        j2 = JobAd(u"Ambition:competition–decisiveness, other words")
+        j2 = JobAd(u"Ambition:competition-decisiveness, other words")
         self.assertEqual(j2.masculine_word_count, 3)
         self.assertEqual(j2.feminine_word_count, 0)
         self.assertEqual(j2.coding, "masculine-coded")
-        j3 = JobAd(u"Ambition:competition–decisiveness&leadership, other words")
+        j3 = JobAd(u"Ambition:competition-decisiveness&leadership, other words")
         self.assertEqual(j3.masculine_word_count, 4)
         self.assertEqual(j3.feminine_word_count, 0)
         self.assertEqual(j3.coding, "strongly masculine-coded")
         # NB: repeated "decisiveness" in j4
-        j4 = JobAd(u"Ambition:competition–decisiveness&leadership,"
+        j4 = JobAd(u"Ambition:competition-decisiveness&leadership,"
             " decisiveness, stubborness, sharing and empathy")
         self.assertEqual(j4.masculine_word_count, 6)
         self.assertEqual(j4.feminine_word_count, 2)
@@ -141,9 +140,9 @@ class TestCase(unittest.TestCase):
         self.assertEqual(j4.coding, "strongly feminine-coded")
 
     def test_analyse(self):
-        j1 = JobAd(u"Ambition:competition–decisiveness&leadership,"
+        j1 = JobAd(u"Ambition:competition-decisiveness&leadership,"
             " decisiveness, stubborness, sharing and empathy")
-        self.assertEqual(j1.ad_text, u"Ambition:competition–decisiveness"
+        self.assertEqual(j1.ad_text, u"Ambition:competition-decisiveness"
             "&leadership, decisiveness, stubborness, sharing and empathy")
         self.assertTrue(j1.coding == "strongly masculine-coded")
         self.assertEqual(j1.masculine_word_count, 6)
@@ -192,6 +191,9 @@ class TestCase(unittest.TestCase):
         self.assertEqual(len(counters), 9)
         total_count = sum([counter.count for counter in counters])
         self.assertEqual(total_count, 10)
+
+    def test_de_hyphen_non_coded_words(self):
+        self.assertEqual(['competition', 'decisiveness'], de_hyphen_non_coded_words('competition-decisiveness'))
 
 if __name__ == '__main__':
     unittest.main()
