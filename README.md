@@ -39,4 +39,12 @@ To run locally:
 
 ```
 env $(cat .ENV | xargs) gunicorn runsite:app
+open https://localhost:8000
+```
+
+Use with browser-sync:
+
+```
+browser-sync start --proxy http://127.0.0.1:8000/ --files="app/templates/**, app/static/**"
+open https://localhost:3000
 ```
