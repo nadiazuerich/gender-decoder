@@ -186,36 +186,3 @@ possible_codings = (
     "masculine-coded",
     "strongly masculine-coded"
 )
-
-explanations = {
-    "feminine-coded": ("This job ad uses more words that "
-                        "are subtly coded as feminine than words that are "
-                        "subtly coded as masculine (according to the "
-                        "research). Fortunately, the research suggests "
-                        "this will have only a slight effect on how appealing "
-                        "the job is to men, and will encourage women applicants."),
-    "masculine-coded": ("This job ad uses more words that "
-                        "are subtly coded as masculine than words that are "
-                        "subtly coded as feminine (according to the research). "
-                        "It risks putting women off applying, but will probably "
-                        "encourage men to apply."),
-    "strongly feminine-coded": ("This job ad uses more words that "
-                        "are subtly coded as feminine than words that are "
-                        "subtly coded as masculine (according to the "
-                        "research). Fortunately, the research suggests this "
-                        "will have only a slight effect on how appealing the "
-                        "job is to men, and will encourage women applicants."),
-    "strongly masculine-coded": ("This job ad uses more words that "
-                        "are subtly coded as masculine than words that are subtly "
-                        "coded as feminine (according to the research). It risks "
-                        "putting women off applying, but will probably encourage "
-                        "men to apply."),
-    "empty": ("This job ad doesn't use any words "
-              "that are subtly coded as masculine or feminine (according to "
-              "the research). It probably won't be off-putting to men or "
-              "women applicants."),
-    "neutral": ("This job ad uses an equal number "
-              "of words that are subtly coded as masculine and feminine "
-              "(according to the research). It probably won't be off-putting "
-              "to men or women applicants.")
-}

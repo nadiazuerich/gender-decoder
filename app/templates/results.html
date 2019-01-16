@@ -1,11 +1,47 @@
 {% extends "basic-layout.html" %}
 
     {% block maincontent %}
-        <h2>Results</h2>
-        <h4>This advert is <strong>{% if job_ad.coding == "empty" %}neutral{% else %}{{ job_ad.coding }}{%endif%}</strong></h4>
-        <p>{{ explanation }}</p>
-        <p>Of course, there are plenty of other factors that affect the diversity of applicants for this role, and of the people who end up being hired. These include the company's reputation for inclusiveness, its culture, and the behaviour and prejudices (both conscious and unconscious) of the interviewers.</p>
-        <div id="masculine">
+      <div class="background-white section">
+        {% if job_ad.coding == "neutral" %}
+          <div class="results-heading">
+            <img src="/static/images/neutral.png"/>
+            <div>
+              <h1>Spot on!</h1>
+              <p>
+                The words used are neutral.<br/>
+                You use the same number of female coded and male coded nouns.
+              </p>
+            </div>
+          </div>
+        {%endif%}
+
+        {% if job_ad.coding == "feminine-coded" or job_ad.coding == "strongly feminine-coded" %}
+          <div class="results-heading">
+            <img src="/static/images/happy.png"/>
+            <div>
+              <h1>Well done!</h1>
+              <p>
+                The words used attract Women in Tech.<br/>
+                Adjectives and nouns used are rather female coded.
+              </p>
+            </div>
+          </div>
+        {%endif%}
+
+        {% if job_ad.coding == "masculine-coded" or job_ad.coding == "strongly masculine-coded" %}
+          <div class="results-heading">
+            <img src="/static/images/unhappy.png"/>
+            <div>
+              <h1>There is some room for improvement!</h1>
+              <p>
+                The words used will deter Women in Tech from applying to your job.<br/>
+                Adjectives and nouns used are rather male coded.
+              </p>
+            </div>
+          </div>
+        {%endif%}
+        <div class="results">
+          <div>
             <h3>Masculine-coded words in this ad</h3>
             {% if masculine_coded_words %}
             <ul>
@@ -16,9 +52,8 @@
             {% else %}
             <p>No masculine-coded words were found.</p>
             {% endif %}
-            <p><a class="reference" href="/about#masculine">See the full list of masculine-coded words</a></p>
-        </div>
-        <div id="feminine">
+          </div>
+          <div >
             <h3>Feminine-coded words in this ad</h3>
             {% if feminine_coded_words %}
             <ul>
@@ -29,14 +64,69 @@
             {% else %}
             <p>No feminine-coded words were found.</p>
             {% endif %}
-            <p><a class="reference" href="/about#feminine">See the full list of feminine-coded words</a></p>
+          </div>
         </div>
-        <div id="share">
-            <h3>Share this result</h3>
-            <p><a href="http://gender-decoder.katmatfield.com/results/{{ job_ad.hash }}">http://gender-decoder.katmatfield.com/results/{{ job_ad.hash }}</a></p>
+
+        {% if job_ad.coding == "neutral" %}
+          <p>Check some stuff if you want.</p>
+        {% endif %}
+        {% if job_ad.coding == "feminine-coded" or job_ad.coding == "strongly feminine-coded" %}
+          <p>Try to replace the remaining male coded words, if any.</p>
+        {%endif%}
+        {% if job_ad.coding == "masculine-coded" or job_ad.coding == "strongly masculine-coded" %}
+          <p>Try to replace more words.</p>
+        {%endif%}
+
+        <div class="action">
+          <a class="button">Need help? Contact us.</a>
         </div>
-        <div id="results">
-            <h3>Job advert text</h3>
-            <textarea name="texttotest" id="texttotest" cols="90" rows="10">{{ job_ad.ad_text }}</textarea>
+      </div>
+
+      <div class="background-white section">
+        <h1>We help you recruit Women in Tech</h1>
+
+        <div class="grid">
+
+          <div class="box">
+            <h3>Re-write Job Ads</h3>
+            <p>Rewriting and revision of existing job ads or creatinge new ones from your keywords into Tech-Women friendly language. In English, German or French. Publishing on jobs.witty.works.</p>
+            <div class="action">
+              <a class="button">Learn more</a>
+            </div>
+          </div>
+
+          <div class="box">
+            <h3>Search of Candidates</h3>
+            <p>Witty works builds a strong bridge to female tech experts who trust us. We search for suitable profiles that fit your requirements in our own female tinted network.</p>
+            <div class="action">
+              <a class="button">Learn more</a>
+            </div>
+          </div>
+
+          <div class="box">
+            <h3>Recruitement Process</h3>
+            <p>Women in Tech drop out during CV screening? Or they don't get into the third round? That probably is due to an unconscious bias in your recruitment process that invisibly puts Women in Tech at disadvantage. We redesign it with you.</p>
+            <div class="action">
+              <a class="button">Learn more</a>
+            </div>
+          </div>
+
+          <div class="box">
+            <h3>Download White Paper</h3>
+            <p>Read how to write tech-women-friendly job ads. Language is crucial to be attractive for Women in Tech.</p>
+            <div class="action">
+              <a class="button">Get the free whitepaper</a>
+            </div>
+          </div>
+
         </div>
-        {% endblock %}
+
+      </div>
+
+      <div class="background-grey section">
+        <h2>Our mission</h2>
+
+        <p>Witty work’s mission is to finally crack the code for the crucial representation of women in tech and digital teams.</p>
+        <p>We ensure tech teams find and keep female talents, a major precondition for creating better products and services, thereby boosting innovation & growth. </p>
+      </div>
+    {% endblock %}

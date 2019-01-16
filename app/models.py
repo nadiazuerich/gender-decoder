@@ -81,10 +81,7 @@ class JobAd(db.Model):
     def assess_coding(self):
         coding_score = self.feminine_word_count - self.masculine_word_count
         if coding_score == 0:
-            if self.feminine_word_count:
-                self.coding = "neutral"
-            else:
-                self.coding = "empty"
+            self.coding = "neutral"
         elif coding_score > 3:
             self.coding = "strongly feminine-coded"
         elif coding_score > 0:

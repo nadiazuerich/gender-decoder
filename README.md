@@ -35,7 +35,15 @@ pip install -r requirements.txt
 
 ## Running
 
-To run locally:
+### Local environment
+
+First create a local database:
+
+```
+env $(cat .ENV | xargs) python db_create.py
+```
+
+Then to run:
 
 ```
 env $(cat .ENV | xargs) gunicorn runsite:app
