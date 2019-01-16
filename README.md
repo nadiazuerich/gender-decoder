@@ -16,3 +16,27 @@ https://pypi.python.org/pypi/genderdecoder/0.3
 
 If you're interested in Gender Decoder, you may also like Karen Schoellkopf's
 https://www.hiremorewomenintech.com/
+
+
+## Installation
+
+Install virtualenv:
+
+```
+virtualenv venv
+```
+
+Activate the env and install dependencies:
+
+```
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+## Running
+
+To run locally:
+
+```
+env $(cat .ENV | xargs) gunicorn runsite:app
+```
