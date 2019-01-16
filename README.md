@@ -56,3 +56,9 @@ Use with browser-sync:
 browser-sync start --proxy http://127.0.0.1:8000/ --files="app/templates/**, app/static/**"
 open https://localhost:3000
 ```
+
+## Run the tests
+
+```
+env $(cat .ENV | xargs) python tests.py
+```

@@ -91,11 +91,11 @@ class TestCase(unittest.TestCase):
                          ['leader (3 times)', 'ambition (2 times)',
                           'competition'])
 
-    def test_assess_coding_neutral_and_empty(self):
+    def test_assess_coding_neutral(self):
         j1 = JobAd("irrelevant words")
         self.assertFalse(j1.masculine_word_count)
         self.assertFalse(j1.feminine_word_count)
-        self.assertEqual(j1.coding, "empty")
+        self.assertEqual(j1.coding, "neutral")
         j2 = JobAd("sharing versus aggression")
         self.assertEqual(j2.masculine_word_count, j2.feminine_word_count)
         self.assertEqual(j2.coding, "neutral")
