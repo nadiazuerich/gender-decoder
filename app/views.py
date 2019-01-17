@@ -4,18 +4,19 @@ from wtforms.validators import ValidationError
 import datetime
 from app import app, db
 from app.forms import JobAdForm
-from app.models import JobAd, CodedWordCounter
-from app.wordlists import *
-
+from app.models import JobAd
+from app.text import Text
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
     form = JobAdForm()
     if request.method == "POST" and form.validate_on_submit():
-        ad = JobAd(form.texttotest.data)
+        text = Text(form.texttotest.data)
+        ad = JobAd(text, form.name.data, form.company.data, form.email.data)
+
         return redirect('results/{0}'.format(ad.hash))
     return render_template('home.html', form=form)
-    
+
 
 @app.route('/results/<ad_hash>')
 def results(ad_hash):

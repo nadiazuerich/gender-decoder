@@ -21,44 +21,58 @@ https://www.hiremorewomenintech.com/
 ## Installation
 
 Install virtualenv:
-
 ```
 virtualenv venv
 ```
 
 Activate the env and install dependencies:
-
 ```
 source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## Running
+## Running locally
 
-### Local environment
+### DB Setup
 
 First create a local database:
-
 ```
-env $(cat .ENV | xargs) python db_create.py
+env $(cat .ENV | xargs) python manage.py db init
+```
+
+### Running locally
+
+Apply the database changes:
+```
+env $(cat .ENV | xargs) python manage.py db upgrade
 ```
 
 Then to run:
-
 ```
 env $(cat .ENV | xargs) gunicorn runsite:app
 open https://localhost:8000
 ```
 
 Use with browser-sync:
-
 ```
 browser-sync start --proxy http://127.0.0.1:8000/ --files="app/templates/**, app/static/**"
 open https://localhost:3000
 ```
 
-## Run the tests
+## Tests
 
 ```
 env $(cat .ENV | xargs) python tests.py
+```
+
+## Migrations
+
+If needed to change the data model, create a migration file using:
+```
+env $(cat .ENV | xargs) python manage.py db migrate
+```
+
+Then apply it to your database:
+```
+env $(cat .ENV | xargs) python manage.py db upgrade
 ```

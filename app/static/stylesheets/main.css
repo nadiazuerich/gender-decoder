@@ -121,10 +121,48 @@ body {
 .section textarea {
   width: 100%;
   padding: 20px;
+  border: 1px solid black;
+  margin-bottom: 40px;
 }
 
 .section textarea::placeholder {
   color: #F95257;
+}
+
+.section .input {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.section .input label {
+  width: 100px;
+  display: inline-block;
+}
+
+.section .input input {
+  height: 40px;
+  width: 50%;
+  display: inline-block;
+  border: 1px solid black;
+  padding: 5px;
+  margin-right: 20px;
+}
+
+.section .input ul {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  margin-top: 10px;
+  color: red;
+}
+
+.section .input.errors label {
+  color: red;
+}
+
+.section .input.errors input {
+  border: 1px solid red;
 }
 
 .section .action {

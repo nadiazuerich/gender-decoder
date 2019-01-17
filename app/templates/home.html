@@ -26,9 +26,13 @@
 
           <p>In this simple test tool, we look for very basic, but deterring factors in your job ad. We challenge adjectives and nouns used. Beware that there are many other factors which make a job ad non-attractive for Women in Tech.</p>
 
+          {% from "_formhelpers.html" import render_field %}
           <form action="/" method="post" name="jobadform">
               {{ form.hidden_tag() }}
               {{ form.texttotest(cols="90", rows="20", placeholder="Paste your ad in English, German or French")|safe }}
+              {{ render_field(form.name) }}
+              {{ render_field(form.company) }}
+              {{ render_field(form.email) }}
               <input type="submit" value="Check this ad" class="button action"/>
           </form>
         </div>
