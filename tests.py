@@ -9,7 +9,9 @@ from app import app, db
 
 from app.models import JobAd
 from app.text import Text, de_hyphen_non_coded_words, clean_up_text
+from app import views
 
+from unittest.mock import patch, Mock
 from flask_testing import TestCase
 
 class DecoderTest(TestCase):
@@ -189,6 +191,25 @@ class DecoderTest(TestCase):
         self.assert_template_used('results.html')
         self.assert_context("feminine_coded_words", ['empathy', 'sharing'])
         self.assert_context("masculine_coded_words", ['analytical'])
+
+    @patch('app.views.send_email')
+    def test_email_sent(self, mock_send_email):
+        data = dict(
+            texttotest = "analytical",
+            name = "fritz",
+            company = "fritz AG",
+            email = "fritz@example.com"
+        )
+        resp = self.client.post('/', data=data)
+        mock_send_email.assert_called_once_with(app.config['EMAIL_TO_NOTIFY'], dict(
+            text = "analytical",
+            name = "fritz",
+            company = "fritz AG",
+            email = "fritz@example.com",
+            hash = JobAd.query.first().hash
+        ))
+        self.assertEqual(resp.status_code, 302)
+
 
 if __name__ == '__main__':
     unittest.main()
